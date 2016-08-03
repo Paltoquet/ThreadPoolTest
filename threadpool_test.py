@@ -8,7 +8,7 @@ import Queue
 import time
 
 #change threadpool -> threadpool2 or threadpool3
-import threadpool2 as threadpool
+import threadpool as threadpool
 
 class ConsumerThread(Thread):
     
@@ -22,6 +22,7 @@ class ConsumerThread(Thread):
         while True:
             val = self.queue.get(block=True)
             self.pool.enqueue(self.read,val)
+            #remove comment to see 
             #time.sleep(0.2)
             
     def read(self,val):
