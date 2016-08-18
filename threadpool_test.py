@@ -7,7 +7,8 @@ from threading import Thread
 import Queue
 import time
 
-import utils.threadpool as threadpool
+#change threadpool -> threadpool2 or threadpool3
+import threadpool2 as threadpool
 
 class ConsumerThread(Thread):
     
@@ -21,11 +22,12 @@ class ConsumerThread(Thread):
         while True:
             val = self.queue.get(block=True)
             self.pool.enqueue(self.read,val)
+            #remove comment to see first threadpool working
             #time.sleep(0.2)
             
     def read(self,val):
         print("debut lecture "+ val)
-        time.sleep(2)
+        time.sleep(4)
         print("fin lecture "+ val)
 
 
@@ -33,7 +35,10 @@ if __name__ == '__main__':
     queue = Queue.Queue()
     consumer = ConsumerThread(queue)
     consumer.start()
-    for i in range(0,3):
+    for i in range(0,10):
+        queue.put("Tache "+str(i))
+    time.sleep(16)
+    for i in range(0,6):
         queue.put("Tache "+str(i))
 
     consumer.join()
