@@ -238,11 +238,11 @@ class ThreadPool(object):
             nb_threads = self._min_threads
 
         # Create the threads
-        for _ in range(0,nb_pending_tasks):
-            self.__nb_active_threads += 1
-            self.__start_thread()
-        for _ in range(0,nb_threads-nb_pending_tasks):
-            self.__start_thread()
+            for _ in range(0,nb_pending_tasks):
+                self.__nb_active_threads += 1
+                self.__start_thread()
+            for i in range(0,nb_threads-nb_pending_tasks):
+                self.__start_thread()
         
         
     def __start_thread(self):
